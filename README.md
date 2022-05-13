@@ -32,7 +32,9 @@ Things you may want to cover:
 | encrypted_password | string | null: false               |
 | first_name         | string | null: false               |
 | last_name          | string | null: false               |
-| birthday           | string | null: false               |
+| first_name_kana    | string | null: false               |
+| last_name_kana     | string | null: false               |
+| date               | string | null: false               |
 
 ### Association
 
@@ -41,13 +43,17 @@ Things you may want to cover:
 
 ## items テーブル
 
-| Column          | Type   | Options     |
-|-----------------|--------|-------------|
-| product_name    | string | null: false |
-| product_version | string | null: false |
-| product_detail  | string | null: false |
-| price           | string | null: false |
-| delivery_charge | string | null: false |
+| Column          | Type       | Options                        |
+|-----------------|------------|--------------------------------|
+| product_name    | string     | null: false                    |
+| product_version | string     | null: false                    |
+| category        | string     | null: false                    |
+| condition       | string     | null: false                    |
+| delivery_charge | string     | null: false                    |
+| delivery_place  | string     | null: false                    |
+| delivery_days   | string     | null: false                    |
+| price           | string     | null: false                    |
+| user            | references | null: false, foreign_key: true |
 
 ### Association
 
@@ -56,10 +62,10 @@ Things you may want to cover:
 
 ## orders テーブル
 
-| Column     | Type      | Options                        |
-|------------|-----------|--------------------------------|
-| item       | references| null: false, foreign_key: true |
-| user       | references| null: false, foreign_key: true |
+| Column     | Type       | Options                        |
+|------------|------------|--------------------------------|
+| item       | references | null: false, foreign_key: true |
+| user       | references | null: false, foreign_key: true |
 
 ### Association
 
