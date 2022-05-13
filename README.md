@@ -34,7 +34,7 @@ Things you may want to cover:
 | last_name          | string | null: false               |
 | first_name_kana    | string | null: false               |
 | last_name_kana     | string | null: false               |
-| date               | string | null: false               |
+| birth_day          | date   | null: false               |
 
 ### Association
 
@@ -43,17 +43,17 @@ Things you may want to cover:
 
 ## items テーブル
 
-| Column          | Type       | Options                        |
-|-----------------|------------|--------------------------------|
-| product_name    | string     | null: false                    |
-| product_version | string     | null: false                    |
-| category        | string     | null: false                    |
-| condition       | string     | null: false                    |
-| delivery_charge | string     | null: false                    |
-| delivery_place  | string     | null: false                    |
-| delivery_days   | string     | null: false                    |
-| price           | string     | null: false                    |
-| user            | references | null: false, foreign_key: true |
+| Column             | Type       | Options                        |
+|--------------------|------------|--------------------------------|
+| product_name       | string     | null: false                    |
+| product_version    | string     | null: false                    |
+| category_id        | integer    | null: false                    |
+| condition_id       | integer    | null: false                    |
+| delivery_charge_id | integer    | null: false                    |
+| delivery_place_id  | integer    | null: false                    |
+| delivery_days_id   | integer    | null: false                    |
+| price              | integer    | null: false                    |
+| user               | references | null: false, foreign_key: true |
 
 ### Association
 
