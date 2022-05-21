@@ -1,4 +1,5 @@
 class ItemsController < ApplicationController
+=begin
   def new
     @item = Item.new
   end
@@ -11,4 +12,5 @@ class ItemsController < ApplicationController
       render :new
     end
   end
+=end
 end
