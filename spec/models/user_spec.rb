@@ -88,6 +88,36 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include('Email is invalid')
       end
+
+      it 'passwordは半角英数字混合でないと登録できない' do
+       @user.password = "000000"
+       @user.valid?
+       expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+      end
+
+      it '名前は大文字でないと登録できない' do
+       @user.first_name = "name"
+       @user.valid?
+       expect(@user.errors.full_messages).to include("First name は全角文字を使用してください")
+      end
+
+      it '名前は大文字でないと登録できない' do
+        @user.last_name = "name"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Last name は全角文字を使用してください")
+       end
+
+       it 'ふりがなは大文字でないと登録できない' do
+        @user.first_name_kana = "kana"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First name kana は全角文字を使用してください")
+       end
+
+       it 'ふりがなは大文字でないと登録できない' do
+        @user.last_name_kana = "kana"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Last name kana は全角文字を使用してください")
+       end
     end
   end
 end
