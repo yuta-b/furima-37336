@@ -5,7 +5,6 @@ RSpec.describe Item, type: :model do
 
   before do
     @item = FactoryBot.build(:item)
-    @item.image = fixture_file_upload('app/assets/images/flag.png')
   end
 
   describe '商品出品' do
@@ -28,34 +27,34 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Product version can't be blank")
       end
 
-      it "category_idが空では登録できない" do
-        @item.category_id = ''
+      it "category_idが「---」では登録できない" do
+        @item.category_id = '---'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Category can't be blank", "Category can't be blank")
+        expect(@item.errors.full_messages).to include("Category に「---」は選択不可")
       end
 
-      it "condition_idが空では登録できない" do
-        @item.condition_id = ''
+      it "condition_idが「---」では登録できない" do
+        @item.condition_id = '---'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Condition can't be blank", "Condition can't be blank")
+        expect(@item.errors.full_messages).to include("Condition に「---」は選択不可")
       end
 
-      it "delivery_charge_idが空では登録できない" do
-        @item.delivery_charge_id = ''
+      it "delivery_charge_idが「---」では登録できない" do
+        @item.delivery_charge_id = '---'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Delivery charge can't be blank", "Delivery charge can't be blank")
+        expect(@item.errors.full_messages).to include("Delivery charge に「---」は選択不可")
       end
 
-      it "delivery_place_idが空では登録できない" do
-        @item.delivery_place_id = ''
+      it "delivery_place_idが「---」では登録できない" do
+        @item.delivery_place_id = '---'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Delivery place can't be blank", "Delivery place can't be blank")
+        expect(@item.errors.full_messages).to include("Delivery place に「---」は選択不可")
       end
 
-      it "delivery_days_idが空では登録できない" do
-        @item.delivery_days_id = ''
+      it "delivery_days_idが「---」では登録できない" do
+        @item.delivery_days_id = '---'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Delivery days can't be blank", "Delivery days can't be blank")
+        expect(@item.errors.full_messages).to include("Delivery days に「---」は選択不可")
       end
 
       it "priceが空では登録できない" do
@@ -65,13 +64,13 @@ RSpec.describe Item, type: :model do
       end
 
       it "priceが¥300~¥9,999,999の間でないと登録できない" do
-        @item.price = '299'
+        @item.price = '0..299'
         @item.valid?
         expect(@item.errors.full_messages).to include("Price は半角数字で300〜9,999,999の範囲で入力してください")
       end
 
       it "priceが¥300~¥9,999,999の間でないと登録できない" do
-        @item.price = '10000000'
+        @item.price = '@item/price >= 10000000'
         @item.valid?
         expect(@item.errors.full_messages).to include("Price は半角数字で300〜9,999,999の範囲で入力してください")
       end
@@ -80,6 +79,12 @@ RSpec.describe Item, type: :model do
         @item.price = '３００'
         @item.valid?
         expect(@item.errors.full_messages).to include("Price は半角数字で300〜9,999,999の範囲で入力してください")
+      end
+
+      it "userが紐づいていない場合は登録できない" do
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("User must exist")
       end
     end
   end

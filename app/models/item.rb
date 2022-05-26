@@ -1,23 +1,18 @@
 class Item < ApplicationRecord
   validates :product_name,       presence: true
   validates :product_version,    presence: true
-  validates :category_id,        presence: true
-  validates :condition_id,       presence: true
-  validates :delivery_charge_id, presence: true
-  validates :delivery_place_id,  presence: true
-  validates :delivery_days_id,   presence: true
-  validates :price,              presence: true, inclusion: { in: 300..9_999_999, message: "は半角数字で300〜9,999,999の範囲で入力してください" }, format: { with: /\A[0-9]+\z/ }
+  validates :category_id,        presence: true, numericality: { other_than: 1 ,message: 'に「---」は選択不可'}
+  validates :condition_id,       presence: true, numericality: { other_than: 1 ,message: 'に「---」は選択不可'}
+  validates :delivery_charge_id, presence: true, numericality: { other_than: 1 ,message: 'に「---」は選択不可'}
+  validates :delivery_place_id,  presence: true, numericality: { other_than: 1 ,message: 'に「---」は選択不可'}
+  validates :delivery_days_id,   presence: true, numericality: { other_than: 1 ,message: 'に「---」は選択不可'}
+  validates :price,              presence: true, inclusion: { only_integer: true, in: 300..9_999_999, message: "は半角数字で300〜9,999,999の範囲で入力してください" }
   validates :image,              presence: true
 
   belongs_to :user
   has_one_attached :image
 
   extend ActiveHash::Associations::ActiveRecordExtensions
-  validates :category_id, numericality: { other_than: 1 , message: "cant' be blank" }
-  validates :condition_id, numericality: { other_than: 1 , message: "cant' be blank" }
-  validates :delivery_charge_id, numericality: { other_than: 1 , message: "cant' be blank" }
-  validates :delivery_place_id, numericality: { other_than: 1 , message: "cant' be blank" }
-  validates :delivery_days_id, numericality: { other_than: 1 , message: "cant' be blank" }
   belongs_to :delivery_place
   belongs_to :category
   belongs_to :condition
