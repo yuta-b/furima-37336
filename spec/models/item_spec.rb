@@ -28,31 +28,31 @@ RSpec.describe Item, type: :model do
       end
 
       it "category_idが「---」では登録できない" do
-        @item.category_id = '---'
+        @item.category_id = '1'
         @item.valid?
         expect(@item.errors.full_messages).to include("Category に「---」は選択不可")
       end
 
       it "condition_idが「---」では登録できない" do
-        @item.condition_id = '---'
+        @item.condition_id = '1'
         @item.valid?
         expect(@item.errors.full_messages).to include("Condition に「---」は選択不可")
       end
 
       it "delivery_charge_idが「---」では登録できない" do
-        @item.delivery_charge_id = '---'
+        @item.delivery_charge_id = '1'
         @item.valid?
         expect(@item.errors.full_messages).to include("Delivery charge に「---」は選択不可")
       end
 
       it "delivery_place_idが「---」では登録できない" do
-        @item.delivery_place_id = '---'
+        @item.delivery_place_id = '1'
         @item.valid?
         expect(@item.errors.full_messages).to include("Delivery place に「---」は選択不可")
       end
 
       it "delivery_days_idが「---」では登録できない" do
-        @item.delivery_days_id = '---'
+        @item.delivery_days_id = '1'
         @item.valid?
         expect(@item.errors.full_messages).to include("Delivery days に「---」は選択不可")
       end
@@ -64,13 +64,13 @@ RSpec.describe Item, type: :model do
       end
 
       it "priceが¥300~¥9,999,999の間でないと登録できない" do
-        @item.price = '0..299'
+        @item.price = '299'
         @item.valid?
         expect(@item.errors.full_messages).to include("Price は半角数字で300〜9,999,999の範囲で入力してください")
       end
 
       it "priceが¥300~¥9,999,999の間でないと登録できない" do
-        @item.price = '@item/price >= 10000000'
+        @item.price = '10_000_000'
         @item.valid?
         expect(@item.errors.full_messages).to include("Price は半角数字で300〜9,999,999の範囲で入力してください")
       end
